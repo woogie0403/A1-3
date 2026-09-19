@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>트립스케치 (TripSketch) - AI 1분 맞춤 여행 코스 플래너</title>
+  <title>트립스케치 (TripSketch) - 에어비앤비 감성 AI 1분 맞춤 여행 플래너</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- 네비게이션 헤더 -->
+  <!-- 상단 네비게이션 헤더 -->
   <header class="navbar">
     <div class="nav-container">
       <a href="#hero" class="logo">
-        <span class="logo-icon">✈️</span> TripSketch
+        <svg class="logo-icon" viewBox="0 0 32 32" width="28" height="28" fill="currentColor">
+          <path d="M16 1c2.008 0 3.463.963 4.751 3.269l.533 1.025c1.954 3.83 6.114 12.44 7.1 14.618 1.258 2.784 1.616 4.908.972 6.945-.705 2.228-2.529 3.868-4.992 4.489-2.185.551-4.706.012-7.315-1.579l-.549-.344-.549.344c-2.609 1.591-5.13 2.13-7.315 1.579-2.463-.621-4.287-2.261-4.992-4.489-.644-2.037-.286-4.161.972-6.945.986-2.178 5.146-10.788 7.1-14.618l.533-1.025C8.537 1.963 9.992 1 12 1h4zm0 2h-4c-1.252 0-2.224.632-3.178 2.336l-.508.977c-1.928 3.78-6.05 12.316-7.014 14.449-1.076 2.383-1.332 4.041-.837 5.607.518 1.637 1.884 2.864 3.738 3.332 1.802.455 3.966.016 6.273-1.39l1.526-.957 1.526.957c2.307 1.406 4.471 1.845 6.273 1.39 1.854-.468 3.22-1.695 3.738-3.332.495-1.566.239-3.224-.837-5.607-.964-2.133-5.086-10.669-7.014-14.449l-.508-.977C18.224 3.632 17.252 3 16 3zm0 13a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+        </svg>
+        <span class="logo-text">TripSketch</span>
       </a>
       <nav class="nav-links">
         <a href="#hero">홈</a>
@@ -22,161 +25,200 @@
   </header>
 
   <main>
-    <!-- Section 1: Hero & 인기 여행지 -->
+    <!-- Section 1: Hero & 플로팅 검색 바 -->
     <section id="hero" class="section hero-section">
       <div class="container hero-container">
-        <div class="badge">✨ 1분 만에 끝내는 맞춤 여행 설계</div>
-        <h1 class="hero-title">고민은 1분만, 떠남은 완벽하게!<br><span class="highlight">AI 맞춤 여행 코스 플래너</span></h1>
-        <p class="hero-desc">복잡한 여행 계획은 이제 그만. 여행지와 취향만 고르면 AI가 시간대별 최적 동선과 숨은 꿀팁까지 한 번에 스케치해 드립니다.</p>
-        
-        <div class="quick-tags">
-          <span class="tag-label">추천 여행지:</span>
-          <button type="button" class="tag-btn" data-dest="제주도">제주도 🍊</button>
-          <button type="button" class="tag-btn" data-dest="부산">부산 🌊</button>
-          <button type="button" class="tag-btn" data-dest="강릉">강릉 ☕</button>
-          <button type="button" class="tag-btn" data-dest="경주">경주 🌸</button>
-          <button type="button" class="tag-btn" data-dest="도쿄">도쿄 🗼</button>
+        <h1 class="hero-title">어디로 떠나시나요?<br><span class="highlight">동선 낭비 없는 AI 맞춤 여행 플래너</span></h1>
+        <p class="hero-desc">여행지와 취향만 고르면, AI가 동선 밀착형 맛집과 인생샷 포토존까지 1분 만에 스케치합니다.</p>
+
+        <!-- 에어비앤비 스타일 일체형 플로팅 검색 캡슐 -->
+        <div class="search-capsule-wrapper">
+          <form id="travel-form" class="search-capsule">
+            <!-- 1. 여행지 -->
+            <div class="search-segment segment-dest">
+              <label for="destination">여행지</label>
+              <input type="text" id="destination" name="destination" placeholder="어디로 떠나세요?" autocomplete="off">
+            </div>
+            <div class="segment-divider"></div>
+
+            <!-- 2. 여행 기간 -->
+            <div class="search-segment">
+              <label for="duration">일정</label>
+              <select id="duration" name="duration">
+                <option value="당일치기">당일치기</option>
+                <option value="1박 2일" selected>1박 2일</option>
+                <option value="2박 3일">2박 3일</option>
+              </select>
+            </div>
+            <div class="segment-divider"></div>
+
+            <!-- 3. 동행자 -->
+            <div class="search-segment">
+              <label for="companion">동행</label>
+              <select id="companion" name="companion">
+                <option value="연인·데이트" selected>연인과 함께</option>
+                <option value="나홀로 여행">나홀로 여행</option>
+                <option value="친구들과">친구들과</option>
+                <option value="가족·부모님">가족·부모님</option>
+              </select>
+            </div>
+            <div class="segment-divider"></div>
+
+            <!-- 4. 이동수단 -->
+            <div class="search-segment">
+              <label for="transport">교통</label>
+              <select id="transport" name="transport">
+                <option value="🚗 렌트카/자차" selected>🚗 렌트카/자차</option>
+                <option value="👟 뚜벅이/대중교통">👟 뚜벅이/대중교통</option>
+              </select>
+            </div>
+
+            <!-- 5. 에어비앤비 핑크 검색 버튼 -->
+            <button type="submit" id="search-btn" class="search-btn" title="AI 코스 스케치하기">
+              <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor">
+                <path d="M13 2a11 11 0 0 1 8.6 17.8l8.7 8.6a1.5 1.5 0 0 1-2.1 2.2l-8.6-8.7A11 11 0 1 1 13 2zm0 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16z"/>
+              </svg>
+              <span class="search-btn-label">스케치</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- 에러 알림 토스트 -->
+        <div id="error-box" class="error-toast hidden">
+          <span class="error-icon">⚠️</span>
+          <span id="error-message"></span>
+        </div>
+
+        <!-- 에어비앤비 스타일 가로 아이콘 카테고리 바 (여행 테마) -->
+        <div class="category-bar">
+          <button type="button" class="category-item active" data-theme="🌿 힐링·자연">
+            <span class="cat-icon">🌿</span>
+            <span class="cat-name">힐링·자연</span>
+          </button>
+          <button type="button" class="category-item" data-theme="🍜 로컬 미식">
+            <span class="cat-icon">🍜</span>
+            <span class="cat-name">로컬 미식</span>
+          </button>
+          <button type="button" class="category-item" data-theme="☕ 감성 카페 & 핫플">
+            <span class="cat-icon">☕</span>
+            <span class="cat-name">감성 핫플</span>
+          </button>
+          <button type="button" class="category-item" data-theme="🏄 액티비티 & 문화">
+            <span class="cat-icon">🏄</span>
+            <span class="cat-name">액티비티</span>
+          </button>
+          <button type="button" class="category-item" data-theme="🏖️ 오션뷰 & 바다">
+            <span class="cat-icon">🏖️</span>
+            <span class="cat-name">오션뷰</span>
+          </button>
+        </div>
+
+        <!-- 추천 인기 여행지 퀵 태그 -->
+        <div class="popular-chips">
+          <span class="chip-label">인기 추천:</span>
+          <button type="button" class="chip-btn" data-dest="제주도">제주도 🍊</button>
+          <button type="button" class="chip-btn" data-dest="부산">부산 🌊</button>
+          <button type="button" class="chip-btn" data-dest="강릉">강릉 ☕</button>
+          <button type="button" class="chip-btn" data-dest="경주">경주 🌸</button>
+          <button type="button" class="chip-btn" data-dest="도쿄">도쿄 🗼</button>
         </div>
       </div>
     </section>
 
-    <!-- Section 2: AI 코스 플래너 (핵심 기능) -->
+    <!-- Section 2: AI 코스 스케치 결과 (핵심 기능) -->
     <section id="planner" class="section planner-section">
       <div class="container">
-        <div class="section-header">
-          <h2>AI 여행 코스 스케치</h2>
-          <p>원하는 여행 조건과 스타일을 선택하고 생성 버튼을 눌러보세요.</p>
-        </div>
-
-        <!-- 입력 폼 카드 -->
-        <div class="card form-card">
-          <form id="travel-form">
-            <div class="form-group">
-              <label for="destination">어디로 떠나시나요? <span class="required">*필수</span></label>
-              <input type="text" id="destination" name="destination" placeholder="예: 제주도, 강릉, 오사카" autocomplete="off">
-              <small class="field-hint">국내 및 해외 도시 어디든 입력 가능합니다.</small>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="duration">여행 기간</label>
-                <select id="duration" name="duration">
-                  <option value="당일치기">당일치기 알찬 코스</option>
-                  <option value="1박 2일" selected>1박 2일 주말 여행</option>
-                  <option value="2박 3일">2박 3일 힐링 코스</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>여행 스타일 / 테마</label>
-                <div class="theme-options">
-                  <label class="theme-chip">
-                    <input type="radio" name="theme" value="힐링·자연" checked>
-                    <span>🌿 힐링·자연</span>
-                  </label>
-                  <label class="theme-chip">
-                    <input type="radio" name="theme" value="로컬 맛집 투어">
-                    <span>🍜 맛집 투어</span>
-                  </label>
-                  <label class="theme-chip">
-                    <input type="radio" name="theme" value="감성 카페 & 핫플">
-                    <span>☕ 감성 핫플</span>
-                  </label>
-                  <label class="theme-chip">
-                    <input type="radio" name="theme" value="액티비티 & 문화체험">
-                    <span>🏄 액티비티</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" id="generate-btn" class="btn btn-primary">
-              <span class="btn-text">AI 맞춤 코스 스케치하기 🚀</span>
-            </button>
-          </form>
-
-          <!-- 유효성 검사 및 에러 메시지 박스 -->
-          <div id="error-box" class="alert-box error-box hidden">
-            <span class="alert-icon">⚠️</span>
-            <span id="error-message"></span>
-          </div>
-        </div>
-
         <!-- 로딩 인디케이터 (지연/타임아웃 UX 대응) -->
-        <div id="loading-box" class="card loading-card hidden">
-          <div class="spinner"></div>
-          <h3 class="loading-title">AI 가이드가 최적의 동선을 분석 중입니다...</h3>
-          <p class="loading-desc">현지 날씨, 인기 동선, 이동 거리를 계산하고 있습니다. (약 3~7초 소요)</p>
+        <div id="loading-box" class="loading-container hidden">
+          <div class="airbnb-spinner"></div>
+          <h3 class="loading-title">AI 가이드가 동선 낭비 없는 코스를 설계하고 있습니다...</h3>
+          <p id="loading-desc" class="loading-desc">관광지와 직전 스팟 반경 10분 이내 로컬 맛집을 매칭 중입니다 (약 3~7초 소요).</p>
         </div>
 
         <!-- AI 결과 출력 카드 -->
-        <div id="result-box" class="result-container hidden">
-          <div class="card result-card">
+        <div id="result-box" class="result-wrapper hidden">
+          <div class="result-card">
+            <!-- 코스 헤더 -->
             <div class="result-header">
-              <div class="result-meta">
-                <span id="res-badge" class="badge">추천 일정</span>
-                <span id="res-theme-tag" class="theme-tag">🌿 힐링</span>
+              <div class="header-top">
+                <span id="res-badge" class="badge-airbnb">★ AI 추천 코스</span>
+                <span id="res-theme-tag" class="theme-tag">🌿 힐링·자연</span>
               </div>
-              <h3 id="res-title">제주도 1박 2일 감성 힐링 코스</h3>
-              <p id="res-summary" class="res-summary">바다 바람과 함께 여유를 만끽하는 코스입니다.</p>
+              <h2 id="res-title" class="res-title">제주 서쪽 감성 힐링 1박 2일 코스</h2>
+              <p id="res-summary" class="res-summary">바다 바람과 돌담길을 따라 여유롭게 즐기는 감성 여정입니다.</p>
             </div>
 
-            <!-- 타임라인 코스 리스트 -->
+            <!-- 💰 1인 예상 여행 경비 카드 -->
+            <div class="budget-card">
+              <div class="budget-icon">💰</div>
+              <div class="budget-info">
+                <div class="budget-label">1인 기준 예상 여행 경비 (식비+카페+입장료)</div>
+                <div id="res-budget" class="budget-amount">약 75,000원 ~ 90,000원</div>
+              </div>
+              <div class="budget-tag">동선 절약 완료</div>
+            </div>
+
+            <!-- 동선 밀착형 타임라인 코스 리스트 -->
+            <div class="timeline-title-bar">
+              <h3>🗺️ 시간대별 동선 밀착 일정</h3>
+              <span class="timeline-hint">※ 모든 식당과 카페는 직전 스팟에서 10분 내외로 배치되었습니다.</span>
+            </div>
+
             <div id="timeline-list" class="timeline">
               <!-- JS에서 동적으로 채워짐 -->
             </div>
 
-            <!-- AI 로컬 꿀팁 박스 -->
-            <div class="tip-card">
-              <div class="tip-header">💡 AI 가이드의 현지 시크릿 꿀팁</div>
-              <p id="res-tips" class="tip-content">주말에는 11시 이전에 방문하셔야 웨이팅을 피할 수 있습니다.</p>
+            <!-- 💡 AI 현지 로컬 꿀팁 박스 -->
+            <div class="local-tip-box">
+              <div class="tip-badge">💡 현지 가이드 시크릿 꿀팁</div>
+              <p id="res-tips" class="tip-text">오후 3시 이전 방문 시 오션뷰 명당 테이블을 잡으실 수 있습니다.</p>
             </div>
 
-            <div class="result-footer">
-              <button type="button" id="copy-btn" class="btn btn-secondary">📋 일정 복사하기</button>
-              <button type="button" id="reset-btn" class="btn btn-outline">새로 계획하기 🔄</button>
+            <!-- 결과 하단 액션 버튼 -->
+            <div class="result-actions">
+              <button type="button" id="copy-btn" class="btn btn-airbnb">📋 전체 일정 복사하기</button>
+              <button type="button" id="reset-btn" class="btn btn-outline">새로운 일정 스케치하기 🔄</button>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
     <!-- Section 3: 여행 팁 & FAQ -->
     <section id="tips" class="section tips-section">
       <div class="container">
-        <div class="section-header">
+        <div class="section-title-wrap">
           <h2>여행자 꿀팁 & 자주 묻는 질문</h2>
-          <p>트립스케치를 더욱 알차게 활용하는 가이드입니다.</p>
+          <p>트립스케치를 더욱 완벽하게 즐기는 방법</p>
         </div>
 
         <div class="tips-grid">
           <!-- 체크리스트 카드 -->
-          <div class="card checklist-card">
+          <div class="tip-col-card">
             <h3>🎒 출발 전 필수 체크리스트 4선</h3>
-            <ul class="checklist">
-              <li>✅ <strong>신분증/교통수단 예매권</strong> (모바일 탑승권 캡처해두기)</li>
-              <li>✅ <strong>보조 배터리</strong> (사진과 지도 검색 필수!)</li>
-              <li>✅ <strong>현지 날씨 예보 확인</strong> (기온 차이 대비 겉옷 챙기기)</li>
-              <li>✅ <strong>영업시간 및 휴무일 확인</strong> (식당/카페 사전 체크)</li>
+            <ul class="clean-checklist">
+              <li><span class="check-icon">✓</span> <strong>신분증 / 모바일 탑승권</strong> (캡처본 저장 추천)</li>
+              <li><span class="check-icon">✓</span> <strong>보조 배터리 & 충전선</strong> (사진 촬영 및 네비 필수)</li>
+              <li><span class="check-icon">✓</span> <strong>현지 날씨 & 옷차림 체크</strong> (일교차 대비 겉옷)</li>
+              <li><span class="check-icon">✓</span> <strong>식당 브레이크타임 확인</strong> (사전 영업일 체크)</li>
             </ul>
           </div>
 
           <!-- FAQ 아코디언 카드 -->
-          <div class="card faq-card">
+          <div class="tip-col-card">
             <h3>자주 묻는 질문 (FAQ)</h3>
-            <div class="faq-list">
+            <div class="faq-accordion">
               <details class="faq-item" open>
-                <summary>Q. 해외 도시도 일정 생성이 가능한가요?</summary>
-                <p>네! 도쿄, 방콕, 파리 등 해외 주요 도시명만 입력하시면 현지 인기 동선에 맞춰 알차게 추천해 드립니다.</p>
+                <summary>Q. 맛집은 진짜 동선 근처로 추천되나요?</summary>
+                <p>네! AI가 직전 방문지에서 반경 10분 이내(같은 행정구역)에 위치한 로컬 맛집만 엄선하여 동선 낭비가 전혀 없습니다.</p>
               </details>
               <details class="faq-item">
-                <summary>Q. 생성된 코스가 마음에 안 들면 어떻게 하나요?</summary>
-                <p>여행 스타일(맛집, 액티비티 등)을 변경하거나 [새로 계획하기]를 누르시면 AI가 새로운 스팟으로 재구성해 드립니다.</p>
+                <summary>Q. 뚜벅이와 렌트카 추천이 다른가요?</summary>
+                <p>네, 뚜벅이를 선택하시면 버스 정류장과 도보 이동이 편리한 역세권 위주로 동선이 자동 재구성됩니다.</p>
               </details>
               <details class="faq-item">
-                <summary>Q. 코스 생성이 오래 걸리거나 멈추면 어떻게 하나요?</summary>
-                <p>AI 통신 트래픽에 따라 일시적으로 지연될 수 있습니다. 10초 이상 반응이 없다면 다시 시도해 주세요.</p>
+                <summary>Q. 해외 도시도 가능한가요?</summary>
+                <p>도쿄, 오사카, 방콕, 다낭 등 해외 주요 여행지도 동일하게 완벽한 동선과 맛집을 스케치해 드립니다.</p>
               </details>
             </div>
           </div>
@@ -186,9 +228,15 @@
   </main>
 
   <footer>
-    <div class="container footer-container">
-      <p><strong>트립스케치 (TripSketch)</strong> &copy; 2026. All rights reserved.</p>
-      <p class="footer-sub">순수 HTML/CSS/JS 및 Vercel Python Serverless 기반 AI 웹 서비스</p>
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">✈️ TripSketch</span>
+        <p>에어비앤비 감성의 AI 1분 맞춤 여행 코스 플래너</p>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; 2026 TripSketch. All rights reserved.</p>
+        <p class="footer-sub">순수 바닐라 HTML/CSS/JS + Vercel Python Serverless 기반</p>
+      </div>
     </div>
   </footer>
 

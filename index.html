@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>트립스케치 (TripSketch) - 에어비앤비 감성 AI 1분 맞춤 여행 플래너</title>
+  <title>여기로 (Yeogiro) - AI 1분 국내 여행 코스 플래너</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,7 +14,8 @@
         <svg class="logo-icon" viewBox="0 0 32 32" width="28" height="28" fill="currentColor">
           <path d="M16 1c2.008 0 3.463.963 4.751 3.269l.533 1.025c1.954 3.83 6.114 12.44 7.1 14.618 1.258 2.784 1.616 4.908.972 6.945-.705 2.228-2.529 3.868-4.992 4.489-2.185.551-4.706.012-7.315-1.579l-.549-.344-.549.344c-2.609 1.591-5.13 2.13-7.315 1.579-2.463-.621-4.287-2.261-4.992-4.489-.644-2.037-.286-4.161.972-6.945.986-2.178 5.146-10.788 7.1-14.618l.533-1.025C8.537 1.963 9.992 1 12 1h4zm0 2h-4c-1.252 0-2.224.632-3.178 2.336l-.508.977c-1.928 3.78-6.05 12.316-7.014 14.449-1.076 2.383-1.332 4.041-.837 5.607.518 1.637 1.884 2.864 3.738 3.332 1.802.455 3.966.016 6.273-1.39l1.526-.957 1.526.957c2.307 1.406 4.471 1.845 6.273 1.39 1.854-.468 3.22-1.695 3.738-3.332.495-1.566.239-3.224-.837-5.607-.964-2.133-5.086-10.669-7.014-14.449l-.508-.977C18.224 3.632 17.252 3 16 3zm0 13a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
         </svg>
-        <span class="logo-text">TripSketch</span>
+        <span class="logo-text">여기로</span>
+        <span class="logo-badge">국내여행 🇰🇷</span>
       </a>
       <nav class="nav-links">
         <a href="#hero">홈</a>
@@ -28,16 +29,16 @@
     <!-- Section 1: Hero & 플로팅 검색 바 -->
     <section id="hero" class="section hero-section">
       <div class="container hero-container">
-        <h1 class="hero-title">어디로 떠나시나요?<br><span class="highlight">동선 낭비 없는 AI 맞춤 여행 플래너</span></h1>
-        <p class="hero-desc">여행지와 취향만 고르면, AI가 동선 밀착형 맛집과 인생샷 포토존까지 1분 만에 스케치합니다.</p>
+        <h1 class="hero-title">이번 주말 어디 갈까? 고민 끝, <span class="highlight">여기로!</span></h1>
+        <p class="hero-desc">국내 여행지와 취향만 고르면, AI가 동선 밀착형 맛집과 인생샷 포토존까지 1분 만에 스케치합니다.</p>
 
         <!-- 에어비앤비 스타일 일체형 플로팅 검색 캡슐 -->
         <div class="search-capsule-wrapper">
           <form id="travel-form" class="search-capsule">
-            <!-- 1. 여행지 -->
+            <!-- 1. 국내 여행지 -->
             <div class="search-segment segment-dest">
-              <label for="destination">여행지</label>
-              <input type="text" id="destination" name="destination" placeholder="어디로 떠나세요?" autocomplete="off">
+              <label for="destination">국내 여행지</label>
+              <input type="text" id="destination" name="destination" placeholder="어디로 떠나세요? (예: 제주, 강릉, 경주)" autocomplete="off">
             </div>
             <div class="segment-divider"></div>
 
@@ -113,14 +114,15 @@
           </button>
         </div>
 
-        <!-- 추천 인기 여행지 퀵 태그 -->
+        <!-- 추천 인기 국내 여행지 퀵 태그 -->
         <div class="popular-chips">
-          <span class="chip-label">인기 추천:</span>
+          <span class="chip-label">국내 인기 스팟:</span>
           <button type="button" class="chip-btn" data-dest="제주도">제주도 🍊</button>
-          <button type="button" class="chip-btn" data-dest="부산">부산 🌊</button>
           <button type="button" class="chip-btn" data-dest="강릉">강릉 ☕</button>
           <button type="button" class="chip-btn" data-dest="경주">경주 🌸</button>
-          <button type="button" class="chip-btn" data-dest="도쿄">도쿄 🗼</button>
+          <button type="button" class="chip-btn" data-dest="부산">부산 🌊</button>
+          <button type="button" class="chip-btn" data-dest="여수">여수 🌉</button>
+          <button type="button" class="chip-btn" data-dest="전주">전주 🍡</button>
         </div>
       </div>
     </section>
@@ -131,7 +133,7 @@
         <!-- 로딩 인디케이터 (지연/타임아웃 UX 대응) -->
         <div id="loading-box" class="loading-container hidden">
           <div class="airbnb-spinner"></div>
-          <h3 class="loading-title">AI 가이드가 동선 낭비 없는 코스를 설계하고 있습니다...</h3>
+          <h3 class="loading-title">여기로 AI 가이드가 동선 낭비 없는 코스를 설계하고 있습니다...</h3>
           <p id="loading-desc" class="loading-desc">관광지와 직전 스팟 반경 10분 이내 로컬 맛집을 매칭 중입니다 (약 3~7초 소요).</p>
         </div>
 
@@ -141,7 +143,7 @@
             <!-- 코스 헤더 -->
             <div class="result-header">
               <div class="header-top">
-                <span id="res-badge" class="badge-airbnb">★ AI 추천 코스</span>
+                <span id="res-badge" class="badge-airbnb">★ 여기로 추천 코스</span>
                 <span id="res-theme-tag" class="theme-tag">🌿 힐링·자연</span>
               </div>
               <h2 id="res-title" class="res-title">제주 서쪽 감성 힐링 1박 2일 코스</h2>
@@ -188,8 +190,8 @@
     <section id="tips" class="section tips-section">
       <div class="container">
         <div class="section-title-wrap">
-          <h2>여행자 꿀팁 & 자주 묻는 질문</h2>
-          <p>트립스케치를 더욱 완벽하게 즐기는 방법</p>
+          <h2>국내 여행자 꿀팁 & 자주 묻는 질문</h2>
+          <p>여기로(Yeogiro)를 더욱 완벽하게 즐기는 방법</p>
         </div>
 
         <div class="tips-grid">
@@ -197,10 +199,10 @@
           <div class="tip-col-card">
             <h3>🎒 출발 전 필수 체크리스트 4선</h3>
             <ul class="clean-checklist">
-              <li><span class="check-icon">✓</span> <strong>신분증 / 모바일 탑승권</strong> (캡처본 저장 추천)</li>
+              <li><span class="check-icon">✓</span> <strong>신분증 / 모바일 탑승권</strong> (KTX/항공/여객선 캡처본)</li>
               <li><span class="check-icon">✓</span> <strong>보조 배터리 & 충전선</strong> (사진 촬영 및 네비 필수)</li>
               <li><span class="check-icon">✓</span> <strong>현지 날씨 & 옷차림 체크</strong> (일교차 대비 겉옷)</li>
-              <li><span class="check-icon">✓</span> <strong>식당 브레이크타임 확인</strong> (사전 영업일 체크)</li>
+              <li><span class="check-icon">✓</span> <strong>식당 브레이크타임 확인</strong> (로컬 맛집 정기 휴무일 사전 체크)</li>
             </ul>
           </div>
 
@@ -217,8 +219,8 @@
                 <p>네, 뚜벅이를 선택하시면 버스 정류장과 도보 이동이 편리한 역세권 위주로 동선이 자동 재구성됩니다.</p>
               </details>
               <details class="faq-item">
-                <summary>Q. 해외 도시도 가능한가요?</summary>
-                <p>도쿄, 오사카, 방콕, 다낭 등 해외 주요 여행지도 동일하게 완벽한 동선과 맛집을 스케치해 드립니다.</p>
+                <summary>Q. 왜 국내 여행만 지원하나요?</summary>
+                <p>여기로는 대한민국 방방곡곡의 정확한 지리와 로컬 맛집 동선을 오차 없이 밀착 추천하기 위해 국내 여행에 특화되어 있습니다.</p>
               </details>
             </div>
           </div>
@@ -230,11 +232,11 @@
   <footer>
     <div class="container footer-content">
       <div class="footer-brand">
-        <span class="footer-logo">✈️ TripSketch</span>
-        <p>에어비앤비 감성의 AI 1분 맞춤 여행 코스 플래너</p>
+        <span class="footer-logo">✈️ 여기로 (Yeogiro)</span>
+        <p>AI 1분 맞춤 국내 여행 코스 플래너</p>
       </div>
       <div class="footer-copy">
-        <p>&copy; 2026 TripSketch. All rights reserved.</p>
+        <p>&copy; 2026 Yeogiro. All rights reserved.</p>
         <p class="footer-sub">순수 바닐라 HTML/CSS/JS + Vercel Python Serverless 기반</p>
       </div>
     </div>

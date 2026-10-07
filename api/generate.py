@@ -7,10 +7,12 @@ import json
 import os
 import requests
 
-GEMINI_MODEL = "gemini-3.5-flash"
-GEMINI_URL = (
-    f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-)
+GEMINI_MODELS = [
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite",
+    "gemini-3.8-flash",
+    "gemini-flash-latest",
+]
 
 
 def build_prompt(dest, duration, companion, transport, theme):
@@ -95,12 +97,33 @@ def generate_course(dest, duration, companion, transport, theme):
         },
     }
 
-    resp = requests.post(GEMINI_URL, params={"key": api_key}, json=payload, timeout=25)
-    resp.raise_for_status()
+    last_error = None
+    for model_name in GEMINI_MODELS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
+        try:
+            resp = requests.post(url, params={"key": api_key}, json=payload, timeout=25)
+            if resp.status_code == 200:
+                data = resp.json()
+                text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+                if text.startswith("```json"):
+                    text = text[7:]
+                if text.startswith("```"):
+                    text = text[3:]
+                if text.endswith("```"):
+                    text = text[:-3]
+                return json.loads(text.strip())
+            else:
+                last_error = f"{model_name} HTTP {resp.status_code}: {resp.text}"
+                continue
+        except requests.exceptions.Timeout:
+            last_error = f"{model_name} Timeout"
+            continue
+        except requests.exceptions.RequestException as e:
+            last_error = f"{model_name} RequestException: {e}"
+            continue
 
-    data = resp.json()
-    text = data["candidates"][0]["content"]["parts"][0]["text"]
-    return json.loads(text)
+    raise requests.exceptions.RequestException(f"모든 AI 모델 호출 실패: {last_error}")
+
 
 
 class handler(BaseHTTPRequestHandler):
@@ -155,6 +178,11 @@ if __name__ == "__main__":
                 k, v = line.split("=", 1)
                 os.environ.setdefault(k.strip(), v.strip())
 
+    import sys
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
     print("[테스트] '제주도 / 1박 2일 / 연인 / 렌트카 / 힐링' 코스를 생성합니다...\n")
     sample = generate_course("제주도", "1박 2일", "연인·데이트", "🚗 렌트카/자차", "🌿 힐링·자연")
     print(json.dumps(sample, ensure_ascii=False, indent=2))
+

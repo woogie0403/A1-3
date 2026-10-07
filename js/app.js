@@ -142,7 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 7. AI 결과 DOM 렌더링
+  let currentCourseData = null;
+
   function renderResult(data) {
+    currentCourseData = data;
     document.getElementById("res-title").textContent = data.title || "";
     document.getElementById("res-summary").textContent = data.summary || "";
     document.getElementById("res-theme-tag").textContent = data.theme_tag || currentTheme;
@@ -152,19 +155,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const iconMap = { 관광: "🏛️", 맛집: "🍽️", 카페: "☕", 저녁: "🌙" };
     const list = document.getElementById("timeline-list");
     list.innerHTML = "";
+
+    let lastDay = "";
     (data.timeline || []).forEach((item) => {
+      // 새로운 일차(Day) 시작 시 일차 구분선 삽입
+      if (item.day && item.day !== lastDay) {
+        lastDay = item.day;
+        const dayDivider = document.createElement("div");
+        dayDivider.className = "timeline-day-divider";
+        dayDivider.innerHTML = `<span>🗓️ ${item.day}</span>`;
+        list.appendChild(dayDivider);
+      }
+
       const icon = iconMap[item.category] || "📍";
       const el = document.createElement("div");
       el.className = "timeline-item";
       el.innerHTML = `
-        <div class="timeline-time">${item.time || ""}</div>
         <div class="timeline-dot">${icon}</div>
         <div class="timeline-content">
-          <div class="timeline-name">${item.name || ""}</div>
-          <div class="timeline-distance">${item.distance || ""}</div>
-          <div class="timeline-desc">${item.description || ""}</div>
-          ${item.menu ? `<div class="timeline-menu">🍴 ${item.menu}</div>` : ""}
-          ${item.photo ? `<div class="timeline-photo">📸 ${item.photo}</div>` : ""}
+          <div class="timeline-meta">
+            <span class="time-badge">${item.time || ""}</span>
+            <span class="dist-badge">📍 ${item.distance || "동선 최적화"}</span>
+          </div>
+          <div class="spot-title">${item.name || ""}</div>
+          <div class="spot-desc">${item.description || ""}</div>
+          ${item.menu ? `<div class="timeline-menu">🍴 추천 메뉴: ${item.menu}</div>` : ""}
+          ${item.photo ? `<div class="photo-zone">📸 ${item.photo}</div>` : ""}
         </div>
       `;
       list.appendChild(el);
@@ -181,7 +197,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const summary = document.getElementById("res-summary").innerText;
       const budget = document.getElementById("res-budget").innerText;
       const tips = document.getElementById("res-tips").innerText;
-      const textToCopy = `[여기로(Yeogiro) AI 맞춤 국내 여행 일정표]\n\n✈️ ${title}\n${summary}\n\n💰 1인 예상 경비: ${budget}\n\n💡 AI 가이드 꿀팁: ${tips}\n\n✨ 고민 끝, 여기로! (Yeogiro)에서 생성됨`;
+
+      let scheduleText = "";
+      let currentDay = "";
+      (currentCourseData?.timeline || []).forEach((item) => {
+        if (item.day && item.day !== currentDay) {
+          currentDay = item.day;
+          scheduleText += `\n[🗓️ ${currentDay}]\n`;
+        }
+        scheduleText += `• ${item.time} | ${item.name} (${item.category})\n  - ${item.description}\n`;
+        if (item.menu) scheduleText += `  - 🍴 추천메뉴: ${item.menu}\n`;
+        if (item.photo) scheduleText += `  - 📸 포토팁: ${item.photo}\n`;
+      });
+
+      const textToCopy = `[여기로(Yeogiro) AI 맞춤 국내 여행 일정표]\n\n✈️ ${title}\n${summary}\n\n💰 예상 경비: ${budget}\n${scheduleText}\n💡 AI 가이드 꿀팁: ${tips}\n\n✨ 고민 끝, 여기로! (Yeogiro)에서 생성됨`;
 
       navigator.clipboard.writeText(textToCopy).then(() => {
         alert("일정이 클립보드에 복사되었습니다! 친구나 연인에게 공유해 보세요. 📋");
@@ -191,3 +220,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+

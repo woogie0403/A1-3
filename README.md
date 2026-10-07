@@ -81,7 +81,6 @@
 
 #### 4. AI 코딩 도구 활용 및 프롬프트 개선 증빙
 | 엄격한 실존 맛집 프롬프트 |
-| :---: | :---: | :---: |
 | ![증빙1](screenshots/04_ai_prompt1.png) | ![증빙2](screenshots/04_ai_prompt2.png) | ![증빙3](screenshots/04_ai_prompt3.png) |
 
 

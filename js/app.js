@@ -18,9 +18,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryItems = document.querySelectorAll(".category-item");
   const resetBtn = document.getElementById("reset-btn");
   const copyBtn = document.getElementById("copy-btn");
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeToggleIcon = document.getElementById("theme-toggle-icon");
+
+  // [보너스 과제 2: 다크 모드 초기화 및 토글 (localStorage 영구 저장)]
+  const savedTheme = localStorage.getItem("yeogiro-theme");
+  const systemPrefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+    applyTheme("dark");
+  } else {
+    applyTheme("light");
+  }
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      if (themeToggleIcon) themeToggleIcon.textContent = "☀️";
+      if (themeToggle) themeToggle.title = "라이트 모드로 전환";
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      if (themeToggleIcon) themeToggleIcon.textContent = "🌙";
+      if (themeToggle) themeToggle.title = "다크 모드로 전환";
+    }
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const nextTheme = isDark ? "light" : "dark";
+      applyTheme(nextTheme);
+      localStorage.setItem("yeogiro-theme", nextTheme);
+    });
+  }
 
   // 현재 선택된 테마 (기본: 힐링·자연)
   let currentTheme = "🌿 힐링·자연";
+
 
   // 해외 도시 리스트 (국내 여행 한정 방어 UX)
   const foreignCities = [

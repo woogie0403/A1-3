@@ -79,9 +79,11 @@
 #### 3. AI 코스 추천 동작 결과 화면 (1박 2일 다일차 생성)
 ![AI 결과 화면](screenshots/03_ai_result.png)
 
-#### 4. AI 코딩 도구 활용 및 프롬프트 개선 증빙
-| 엄격한 실존 맛집 프롬프트 |
-| ![증빙1](screenshots/04_ai_prompt1.png) | ![증빙2](screenshots/04_ai_prompt2.png) | ![증빙3](screenshots/04_ai_prompt3.png) |
+#### 4. AI 코딩 도구 활용 및 엄격한 실존 맛집 프롬프트 개선 증빙 (3단계 캡처)
+| ① AI 환각 원인 분석 및 실존 맛집 프롬프트 도출 | ② 가짜 상호명 생성 금지 & 권역별 엄격 규칙 코드 | ③ 팩트 추출을 위한 온도(temperature: 0.2) 억제 코드 |
+| :---: | :---: | :---: |
+| ![증빙1: 환각 원인 분석 및 프롬프트 도출](screenshots/04_ai_prompt1.png) | ![증빙2: 엄격한 실존 맛집 원칙 프롬프트 코드](screenshots/04_ai_prompt2.png) | ![증빙3: 팩트 중심 온도 0.2 설정 코드](screenshots/04_ai_prompt3.png) |
+
 
 
 ---

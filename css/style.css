@@ -924,10 +924,22 @@ footer {
   border-bottom-color: #27272a;
 }
 
+[data-theme="dark"] .hero-title {
+  color: #f4f4f5;
+}
+
+[data-theme="dark"] .hero-desc {
+  color: #a1a1aa;
+}
+
 [data-theme="dark"] .search-capsule {
   background: #1f1f23;
   border-color: #3f3f46;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .segment-divider {
+  background-color: #3f3f46;
 }
 
 [data-theme="dark"] .search-segment label {
@@ -940,9 +952,17 @@ footer {
   background: transparent;
 }
 
+[data-theme="dark"] .search-segment input::placeholder {
+  color: #71717a;
+}
+
 [data-theme="dark"] .search-segment select option {
   background: #1f1f23;
   color: #f4f4f5;
+}
+
+[data-theme="dark"] .chip-label {
+  color: #a1a1aa;
 }
 
 [data-theme="dark"] .chip-btn {
@@ -965,9 +985,39 @@ footer {
   border-bottom-color: var(--airbnb-rausch);
 }
 
+[data-theme="dark"] .planner-section {
+  background: #121214;
+}
+
+[data-theme="dark"] .loading-container {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .airbnb-spinner {
+  border-color: #3f3f46;
+  border-top-color: var(--airbnb-rausch);
+}
+
+[data-theme="dark"] .loading-title {
+  color: #f4f4f5;
+}
+
+[data-theme="dark"] .loading-desc {
+  color: #a1a1aa;
+}
+
 [data-theme="dark"] .result-card {
   background: #18181b;
   border-color: #27272a;
+}
+
+[data-theme="dark"] .res-title {
+  color: #f4f4f5;
+}
+
+[data-theme="dark"] .res-summary {
+  color: #a1a1aa;
 }
 
 [data-theme="dark"] .theme-tag {
@@ -993,6 +1043,22 @@ footer {
   color: #a7f3d0;
 }
 
+[data-theme="dark"] .timeline-title-bar {
+  border-bottom-color: #27272a;
+}
+
+[data-theme="dark"] .timeline-title-bar h3 {
+  color: #f4f4f5;
+}
+
+[data-theme="dark"] .timeline-hint {
+  color: #a1a1aa;
+}
+
+[data-theme="dark"] .timeline::before {
+  background: #27272a;
+}
+
 [data-theme="dark"] .timeline-dot {
   background: #18181b;
   box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.25);
@@ -1006,6 +1072,10 @@ footer {
 [data-theme="dark"] .dist-badge {
   background: rgba(3, 105, 161, 0.25);
   color: #38bdf8;
+}
+
+[data-theme="dark"] .spot-title {
+  color: #f4f4f5;
 }
 
 [data-theme="dark"] .spot-desc {
@@ -1048,6 +1118,15 @@ footer {
 
 [data-theme="dark"] .tips-section {
   background: #121214;
+  border-top-color: #27272a;
+}
+
+[data-theme="dark"] .section-title-wrap h2 {
+  color: #f4f4f5;
+}
+
+[data-theme="dark"] .section-title-wrap p {
+  color: #a1a1aa;
 }
 
 [data-theme="dark"] .tip-col-card {
@@ -1055,13 +1134,22 @@ footer {
   border-color: #27272a;
 }
 
+[data-theme="dark"] .tip-col-card h3 {
+  color: #f4f4f5;
+}
+
 [data-theme="dark"] .clean-checklist li {
   color: #d1d5db;
   border-bottom-color: #27272a;
 }
 
+[data-theme="dark"] .clean-checklist strong {
+  color: #f4f4f5;
+}
+
 [data-theme="dark"] .faq-item {
   border-color: #27272a;
+  background: #18181b;
 }
 
 [data-theme="dark"] .faq-summary {
@@ -1072,13 +1160,27 @@ footer {
   color: #a1a1aa;
 }
 
+/* 푸터 다크 모드 (태그와 클래스 모두 완벽 적용) */
+[data-theme="dark"] footer,
 [data-theme="dark"] .footer {
   background: #18181b;
   border-top-color: #27272a;
 }
 
-[data-theme="dark"] .footer-brand p,
-[data-theme="dark"] .footer-copy {
+[data-theme="dark"] .footer-logo {
+  color: var(--airbnb-rausch);
+}
+
+[data-theme="dark"] .footer-brand p {
+  color: #a1a1aa;
+}
+
+[data-theme="dark"] .footer-copy p {
+  color: #a1a1aa;
+}
+
+[data-theme="dark"] .footer-sub {
   color: #71717a;
 }
+
 
